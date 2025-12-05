@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Damzang Chimi Seldon - Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    :root {
+      --primary-color: #AEC6CF;
+      --secondary-color: #B2A2C6;
+      --accent-color: #FFB3BA;
+      --bg-light: #f8f9fa;
+      --bg-gradient: linear-gradient(135deg, #F0F4F7, #E4E9F2);
+      --font-color: #333;
+      --card-bg: white;
+    }
+
+    /* Global Scroll Behavior for Smooth Navigation */
+    html {
+      scroll-behavior: smooth;
+      /* Add padding to account for the fixed header height */
+      scroll-padding-top: 6rem; 
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-gradient);
+      color: var(--font-color);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* --- Navigation Bar Styles --- */
+    .navbar {
+      background-color: var(--primary-color);
+      padding: 1rem 0;
+      position: sticky; /* Keeps the navigation at the top */
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: white;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0.5rem;
+      border-radius: 8px;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .nav-links a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .menu-toggle {
+      display: none;
+      color: white;
+      font-size: 1.75rem;
+      cursor: pointer;
+    }
+    
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-bg-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 10.1%);
+      background-size: 30px 30px;
+      animation: bg-pattern 30s linear infinite;
+      opacity: 0.1;
+    }
+    
+    @keyframes bg-pattern {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .hero h2 {
+      font-size: clamp(1rem, 3vw, 2rem);
+      font-weight: 300;
+      margin-top: 0;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      padding-left: 0;
+      border: none;
+    }
+
+    .hero #typing-text {
+      height: 1.5em; 
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 0.15em solid white;
+      animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: white; }
+    }
+
+    /* Main Content Grid */
+    .content-grid {
+      display: grid;
+      gap: 2rem;
+      /* Changed to 1fr to enforce a single column layout on all screen sizes */
+      grid-template-columns: 1fr;
+    }
+    
+    .card {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+
+    .card h3 {
+      border-left: 5px solid var(--accent-color);
+      padding-left: 0.8rem;
+      margin-top: 0;
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+    
+    .card .icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .card ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .card li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    
+    .card li::before {
+      content: '✔';
+      color: var(--accent-color);
+      position: absolute;
+      left: 0;
+    }
+    
+    .collapsible-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .collapsible {
+      background: var(--secondary-color);
+      color: white;
+      cursor: pointer;
+      padding: 0.8rem 1rem;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 0.9rem;
+      border-radius: 12px;
+      transition: background 0.3s, transform 0.2s;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .collapsible:hover {
+      background: var(--accent-color);
+      transform: translateY(-1px);
+    }
+
+    .collapsible i {
+      transition: transform 0.3s ease;
+    }
+
+    .collapsible.active i {
+      transform: rotate(180deg);
+    }
+
+    .content {
+      padding: 0 1rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out, padding 0.5s;
+      background: #f0f4f7;
+      border-radius: 12px;
+      border: 1px dashed var(--accent-color);
+    }
+    
+    .collapsible.active + .content {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .content ul {
+        list-style-type: '🚀 ';
+        padding-left: 1.5rem;
+    }
+
+    .social-icons {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: flex-start;
+      gap: 1rem;
+    }
+    
+    .social-icons a {
+      color: var(--primary-color);
+      font-size: 2rem;
+      transition: color 0.3s, transform 0.2s;
+    }
+    
+    .social-icons a:hover {
+      color: var(--accent-color);
+      transform: scale(1.1);
+    }
+
+    /* Small screen adjustments */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 2rem 1rem;
+      }
+      /* Removed grid adjustment here as it's now 1fr globally */
+      .card {
+        padding: 1.5rem;
+      }
+
+      /* Mobile Nav Overrides */
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 66px; /* Below the nav bar */
+        left: 0;
+        background-color: var(--primary-color);
+        padding: 0.5rem 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        text-align: center;
+        padding: 0.75rem 1rem;
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- --- Navigation Bar (Links updated to scroll to sections) --- -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#top" class="logo">DC Seldon</a>
+      <div class="nav-links" id="navMenu">
+        <a href="#about-card">About</a>
+        <a href="#fabacademy-card">Fab Academy</a>
+        <a href="#achievements-card">Achievements</a>
+        <a href="#projects-card">Projects</a>
+        <a href="#skills-card">Skills</a>
+        <a href="#contact-card">Contact</a>
+      </div>
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <div class="hero-bg-pattern"></div>
+      <img src="https://placehold.co/150x150/AEC6CF/FFFFFF?text=DC" alt="Damzang Chimi Seldon" class="hero-image">
+      <h1>Damzang Chimi Seldon</h1>
+      <h2 id="typing-text"></h2>
+      <!-- Removed the "Explore Portfolio" button here -->
+    </div>
+
+    <main class="content-grid">
+      <!-- About Me Card -->
+      <div class="card" id="about-card">
+        <span class="icon"><i class="fas fa-user-circle"></i></span>
+        <h3>About Me</h3>
+        <p>Kuzuzangpo la! My name is Damzang Chimi Seldon, and I am from Yamthak, Chumey, Bumthang. I was born on January 12, 2008, in Phuentsholing. Being the middle child among three siblings has taught me to find common ground, see things from different perspectives, and stand independently. Beyond academics, I enjoy journaling, which strengthens my public speaking and clarity of thought. Sports like athletics, cross-country, and volleyball keep me active while building resilience, teamwork, and discipline.</p>
+      </div>
+
+      <!-- Fab Academy Card -->
+      <div class="card" id="fabacademy-card">
+        <span class="icon"><i class="fas fa-graduation-cap"></i></span>
+        <h3>Fab Academy Journey</h3>
+        <p>I feel truly blessed to have completed the five-month Fab Academy diploma course. Balancing schoolwork, Fab Academy assignments, and a math competition taught me time management, adaptability, and problem-solving. I explored CAD, electronics, programming, and project management. One highlight was my final project — the <b>Impromptu Speech Selector</b>, inspired by my school’s tradition of extempore speeches. Making it to the global top 10 was a proud moment. <a href="https://fabacademy.org/2024/labs/dgi/students/damzang-selden/project/finalproject/" target="_blank">View Documentation</a>.</p>
+      </div>
+
+      <!-- Achievements Card -->
+      <div class="card" id="achievements-card">
+        <span class="icon"><i class="fas fa-trophy"></i></span>
+        <h3>Achievements</h3>
+        <div class="collapsible-container">
+            <button class="collapsible">Academic & Innovation <i class="fas fa-chevron-down"></i></button>
+            <div class="content">
+              <ul>
+                <li><a href="https://fabacademy.org/2024/labs/dgi/students/damzang-selden/project/finalproject/" target="_blank" rel="noopener noreferrer">Fab Academy Global Top 10 Project.</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1J19_n92CpEeZ-rYTxDNuE1goAZglwUN1?usp=sharing" target="_blank" rel="noopener noreferrer">Researcher for Moot Court</a></li>
+                <li><a href="https://drive.google.com/drive/folders/15jwmaY813vKR1BsyuPnQjBGipF6iuKAe?usp=sharing" target="_blank" rel="noopener noreferrer">Singapore International Mathematical & Computational Challenge participant.</a></li>
+                <li><a href="https://fabble.cc/fablabshinagawa/bhutanxmakerthonxteam2" target="_blank" rel="noopener noreferrer">Makerthorn innovator</a> and <a href="https://fabble.cc/fablabshinagawa/2ndxbhutanxmakeathonxteam7" target="_blank" rel="noopener noreferrer">2nd Makeathon</a>.</li>
+                <li><a href="https://drive.google.com/drive/folders/1E7-DPEkmuftOHL6rESUn3-ryzlfON8p7?usp=sharing" target="_blank" rel="noopener noreferrer">Space Settlement Design Competition(ARSSDC) participant.</a></li>
+                <li><a href="https://dgi.edu.bt/wp-content/uploads/2024/11/Recipes-eBook-2024-7-Gifts-Series3-DGI.pdf" target="_blank" rel="noopener noreferrer">Selected for the Recipes e-Book.</a></li>
+              </ul>
+            </div>
+    
+            <button class="collapsible">Competitions <i class="fas fa-chevron-down"></i></button>
+            <div class="content">
+              <ul>
+                <li><a href="https://drive.google.com/drive/folders/1E7-DPEkmuftOHL6rESUn3-ryzlfON8p7?usp=sharing" target="_blank" rel="noopener noreferrer">Asian Regional Space Settlement Design Competition – Mars settlement design.</a></li>
+                <li><a href="https://drive.com/drive/folders/1J19_n92CpEeZ-rYTxDNuE1goAZglwUN1?usp=sharing" target="_blank" rel="noopener noreferrer">Moot Court researcher, specializing in constitutional law.</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1P1xbe-T8wmsfuHhwpePeWgUHGlUfENZO?usp=sharing" target="_blank" rel="noopener noreferrer">G-PIE Conference participant, exploring global issues and cultural exchange.</a></li>
+                <li><a href="https://drive.google.com/drive/folders/15jwmaY813vKR1BsyuPnQjBGipF6iuKAe?usp=sharing" target="_blank" rel="noopener noreferrer">Singapore International Mathematical & Computational Challenge, using mathematics and machine learning to solve real-life problems.</a></li>
+              </ul>
+            </div>
+    
+            <button class="collapsible">Sports & Activities <i class="fas fa-chevron-down"></i></button>
+            <div class="content">
+              <ul>
+                <li><a href="https://drive.google.com/drive/folders/1IMVr8pByKvxLIeo-p9m-SADN9XfaebFZ?usp=sharing" target="_blank" rel="noopener noreferrer">Athelete - Sprinter, jumper and relay runner.</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1IMVr8pByKvxLIeo-p9m-SADN9XfaebFZ?usp=sharing" target="_blank" rel="noopener noreferrer">Volleyball, football, and basketball team player.</a></li>
+                <li>Wilderness first aid certification.</li>
+                <li><a href="https://drive.google.com/drive/folders/1kksj60JRPF6fKaaFB-Igay2dpo6beJYw?usp=sharing" target="_blank" rel="noopener noreferrer">Nature Retreat participant — building leadership, teamwork, and survival skills.</a></li>
+              </ul>
+            </div>
+        </div>
+      </div>
+      
+      <!-- Projects Card -->
+      <div class="card" id="projects-card">
+        <span class="icon"><i class="fas fa-cogs"></i></span>
+        <h3>Projects</h3>
+        <ul>
+          <li><b>Impromptu Speech Selector:</b> A digital tool for extempore practice.</li>
+          <li><b>3D Scanner:</b> Built with programming and laser cutting.</li>
+          <li><b>Mars Settlement Design:</b> <a href="https://drive.google.com/drive/folders/1E7-DPEkmuftOHL6rESUn3-ryzlfON8p7?usp='sharing'" target="_blank" rel="noopener noreferrer">Space settlement with robotics and drones.</a></li>
+        </ul>
+      </div>
+
+      <!-- Skills Card -->
+      <div class="card" id="skills-card">
+        <span class="icon"><i class="fas fa-star"></i></span>
+        <h3>Skills</h3>
+        <ul>
+          <li>Project Management & Time Management</li>
+          <li>CAD Design & Digital Fabrication</li>
+          <li>Arduino & ESP32 Programming</li>
+          <li>Legal Research & Constitutional Analysis</li>
+          <li>Teamwork, Leadership & Public Speaking</li>
+        </ul>
+      </div>
+      
+      <!-- Contact Card -->
+      <div class="card" id="contact-card">
+        <span class="icon"><i class="fas fa-envelope"></i></span>
+        <h3>Contact</h3>
+        <p>If you’d like to connect, you can reach me at:</p>
+        <p><b>Email:</b> <a href="mailto:damzang.cseldon2020@academy.bt">damzang.cseldon2020@academy.bt</a></p>
+        <p><b>Location:</b> Bhutan</p>
+        <div class="social-icons">
+          <a href="https://www.linkedin.com/in/damzang-chimi-seldon-013254241" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+          <a href="https://gitlab.fabcloud.org/academany/fabacademy/2024/labs/dgi/students/damzang-selden" aria-label="GitLab" target="_blank" rel="noopener noreferrer"><i class="fab fa-gitlab"></i></a>
+          <a href="https://www.facebook.com/damzang.chimiselden/" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Script for collapsible Achievement sections
+    const collapsibles = document.querySelectorAll(".collapsible");
+    collapsibles.forEach(btn => {
+      btn.addEventListener("click", function() {
+        this.classList.toggle("active");
+        const content = this.nextElementSibling;
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+          content.style.paddingTop = '0';
+          content.style.paddingBottom = '0';
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+          content.style.paddingTop = '1rem';
+          content.style.paddingBottom = '1rem';
+        }
+      });
+    });
+
+    // --- Navigation Bar Script (Mobile Menu Toggle) ---
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const navLinks = document.querySelectorAll('#navMenu a');
+
+    // 1. Toggle mobile menu
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+    
+    // 2. Close menu when a link is clicked (mobile view)
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            }
+        });
+    });
+    // --- End Navigation Bar Script ---
+
+    // Typing effect script for the Hero section
+    const roles = ["Student", "Innovator", "Learner"];
+    let roleIndex = 0;
+    let charIndex = 0;
+    const typingTextElement = document.getElementById("typing-text");
+
+    function type() {
+      if (charIndex < roles[roleIndex].length) {
+        typingTextElement.textContent += roles[roleIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 50);
+      } else {
+        setTimeout(erase, 2000);
+      }
+    }
+
+    function erase() {
+      if (charIndex > 0) {
+        typingTextElement.textContent = roles[roleIndex].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, 25);
+      } else {
+        roleIndex = (roleIndex + 1) % roles.length;
+        setTimeout(type, 500);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(type, 500);
+    });
+  </script>
+</body>
+</html>
